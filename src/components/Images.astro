@@ -1,0 +1,32 @@
+---
+import { Image, Picture } from "@astrojs/image/components";
+
+export interface Props {
+  images: object;
+}
+
+const { images } = Astro.props;
+---
+
+<section>
+  <p>Images Component</p>
+  {
+    images.map((photo, index) => (
+      <div>
+        <p>{photo.url}</p>
+        <Picture
+          src={photo.url}
+          widths={[400, 800]}
+          sizes="(max-width: 800px) 100vw, 800px"
+          alt={photo.alt}
+          aspectRatio="4:3"
+        />
+      </div>
+    ))
+  }
+</section>
+<style>
+  section {
+    background-color: #9acdcd;
+  }
+</style>

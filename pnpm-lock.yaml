@@ -2,11 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   '@astrojs/image': ^0.12.1
+  '@splidejs/splide': ^4.1.4
   astro: ^1.6.15
   sharp: ^0.31.2
 
 dependencies:
   '@astrojs/image': 0.12.1_sharp@0.31.2
+  '@splidejs/splide': 4.1.4
   astro: 1.6.15
   sharp: 0.31.2
 
@@ -500,6 +502,10 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       tsm: 2.3.0
+    dev: false
+
+  /@splidejs/splide/4.1.4:
+    resolution: {integrity: sha512-5I30evTJcAJQXt6vJ26g2xEkG+l1nXcpEw4xpKh0/FWQ8ozmAeTbtniVtVmz2sH1Es3vgfC4SS8B2X4o5JMptA==}
     dev: false
 
   /@types/acorn/4.0.6:

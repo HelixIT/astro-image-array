@@ -1,0 +1,131 @@
+---
+import { Image, Picture } from "@astrojs/image/components";
+
+export interface Props {
+  images: object;
+}
+
+const { images } = Astro.props;
+import "@splidejs/splide/css";
+---
+
+<section>
+  <p>Splide Component</p>
+  {
+    images.map((photo, index) => (
+      <div>
+        <p>{photo.url}</p>
+        <Picture
+          src={photo.url}
+          widths={[400, 800]}
+          sizes="(max-width: 800px) 100vw, 800px"
+          alt={photo.alt}
+          aspectRatio="4:3"
+        />
+      </div>
+    ))
+  }<section id="main-carousel" class="splide" aria-label="My Awesome Gallery">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {
+          images.map((image, idx) => {
+            return (
+              <li class="splide__slide">
+                <Picture
+                  src={image.url}
+                  aspectRatio="16:9"
+                  widths={[800]}
+                  sizes="(max-width: 800px) 100vw, 800px"
+                  alt={image.alt}
+                />
+                <p>
+                  {idx} {image.alt}| {image.url}
+                </p>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+
+  <ul id="thumbnails" class="thumbnails">
+    {
+      images.map((image) => {
+        return (
+          <li class="thumbnail">
+            <Picture
+              src={image.url}
+              aspectRatio="16:9"
+              widths={[200]}
+              sizes="(max-width: 800px) 100vw, 800px"
+              alt={image.alt}
+            />
+          </li>
+        );
+      })
+    }
+  </ul>
+  <style lang="scss">
+    .thumbnails {
+      display: flex;
+      margin: 1rem auto 0;
+      padding: 0;
+      justify-content: center;
+    }
+
+    .thumbnail {
+      width: 70px;
+      height: 70px;
+      overflow: hidden;
+      list-style: none;
+      margin: 0 0.2rem;
+      cursor: pointer;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+  <script>
+    import Splide from "@splidejs/splide";
+
+    var splide = new Splide("#main-carousel", {
+      pagination: false,
+    });
+
+    var thumbnails = document.getElementsByClassName("thumbnail");
+    var current;
+
+    for (var i = 0; i < thumbnails.length; i++) {
+      initThumbnail(thumbnails[i], i);
+    }
+
+    function initThumbnail(thumbnail, index) {
+      thumbnail.addEventListener("click", function () {
+        splide.go(index);
+      });
+    }
+
+    splide.on("mounted move", function () {
+      var thumbnail = thumbnails[splide.index];
+
+      if (thumbnail) {
+        if (current) {
+          current.classList.remove("is-active");
+        }
+
+        thumbnail.classList.add("is-active");
+        current = thumbnail;
+      }
+    });
+
+    splide.mount();
+  </script>
+</section>
+<style>
+  section {
+    background-color: #9acdcd;
+  }
+</style>

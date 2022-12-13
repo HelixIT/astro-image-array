@@ -2,7 +2,9 @@
 import { Image, Picture } from "@astrojs/image/components";
 
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import Images from "../components/Images.astro";
+import Splide from "../components/Splide.astro";
+
 const photos = [
   {
     url: "../src/images/cat1.jpg",
@@ -93,7 +95,7 @@ const photospub = [
           <p>{photo.url}</p>
           <Picture
             src={photo.url}
-            widths={[200, 400, 800]}
+            widths={[400, 800]}
             sizes="(max-width: 800px) 100vw, 800px"
             alt={photo.alt}
             aspectRatio="4:3"
@@ -101,6 +103,10 @@ const photospub = [
         </div>
       ))
     }
+    <h3>As Props</h3>
+    <Images images={photospub} />
+    <h3>Splide with Props</h3>
+    <Splide images={photospub} />
   </main>
 </Layout>
 
